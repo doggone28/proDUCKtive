@@ -1,30 +1,48 @@
 {
   "manifest_version": 3,
   "name": "proDUCKtive",
-  "version": "1.0",
-  "description": "Stay productive with a quacking duck reminder",
-  "permissions": ["activeTab", "storage", "tabs"],
+  "version": "1.0.0",
+  "description": "A duck companion that helps you stay productive",
+  
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "src/background.js"
   },
+  
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["src/content.js"]
     }
   ],
+  
   "action": {
-    "default_popup": "popup.html",
-    "default_title": "ProDUCKtive Settings",
-    "default_icon": {
-      "16": "duck/icons/icon16.svg",
-      "48": "duck/icons/icon48.svg",
-      "128": "duck/icons/icon128.svg"
-    }
+    "default_popup": "src/popup/popup.html",
+    "default_title": "proDUCKtive Duck"
   },
+  
   "icons": {
-    "16": "duck/icons/icon16.svg",
-    "48": "duck/icons/icon48.svg",
-    "128": "duck/icons/icon128.svg"
-  }
+    "16": "public/icons/icon-16.png",
+    "48": "public/icons/icon-48.png",
+    "128": "public/icons/icon-128.png"
+  },
+  
+  "web_accessible_resources": [{
+    "resources": [
+      "public/duck-static.png",
+      "public/duck-animated.gif", 
+      "public/quack.mp3"
+    ],
+    "matches": ["<all_urls>"]
+  }]
 }

@@ -1,0 +1,96 @@
+body {
+  width: 300px;
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.popup-container {
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.header h1 {
+  margin: 0 0 8px 0;
+  font-size: 1.4em;
+}
+
+.status {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  display: inline-block;
+}
+
+.stats {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  font-size: 0.9em;
+  opacity: 0.9;
+}
+
+.value {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn.productive {
+  background: #10b981;
+  color: white;
+}
+
+.btn.productive:hover {
+  background: #059669;
+}
+
+.btn.unproductive {
+  background: #ef4444;
+  color: white;
+}
+
+.btn.unproductive:hover {
+  background: #dc2626;
+}
+
+.footer {
+  text-align: center;
+  font-size: 0.8em;
+  opacity: 0.8;
+}
+
+.footer p {
+  margin: 0;
+}
