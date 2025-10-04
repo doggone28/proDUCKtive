@@ -4,6 +4,7 @@ function updatePopup() {
     if (response) {
       const statusElement = document.getElementById('status');
       const inactiveTimeElement = document.getElementById('inactiveTime');
+      const currentSiteElement = document.getElementById('currentSite');
       
       if (response.isProductive) {
         statusElement.textContent = '🟢 Productive';
@@ -14,7 +15,58 @@ function updatePopup() {
       }
       
       inactiveTimeElement.textContent = response.inactiveTime + 's';
+      
+      if (response.currentUrl) {
+        try {
+          const domain = new URL(response.currentUrl).hostname;
+          currentSiteElement.textContent = domain;
+        } catch {
+          currentSiteElement.textContent = response.currentUrl;
+        }
+      } else {
+        currentSiteElement.textContent = '-';
+      }
     }
+  });
+  
+  updateWebsiteLists();
+}
+
+// Update website lists display
+function updateWebsiteLists() {
+  chrome.runtime.sendMessage({ action: 'getWebsiteLists' }, (response) => {
+    if (response) {
+      updateWebsiteList('productiveList', response.productiveSites || []);
+      updateWebsiteList('unproductiveList', response.unproductiveSites || []);
+    }
+  });
+}
+
+function updateWebsiteList(elementId, sites) {
+  const listElement = document.getElementById(elementId);
+  listElement.innerHTML = '';
+  
+  sites.forEach(site => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <span>${site}</span>
+      <button class="remove-btn" data-site="${site}" data-list="${elementId === 'productiveList' ? 'productiveSites' : 'unproductiveSites'}">×</button>
+    `;
+    listElement.appendChild(li);
+  });
+  
+  // Add remove event listeners
+  listElement.querySelectorAll('.remove-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const site = e.target.getAttribute('data-site');
+      const listType = e.target.getAttribute('data-list');
+      chrome.runtime.sendMessage({
+        action: 'removeWebsite',
+        website: site,
+        listType: listType
+      });
+      updateWebsiteLists();
+    });
   });
 }
 
@@ -33,6 +85,30 @@ document.getElementById('unproductiveBtn').addEventListener('click', () => {
     productive: false 
   });
   updatePopup();
+});
+
+// Add website functionality
+document.getElementById('addWebsiteBtn').addEventListener('click', () => {
+  const input = document.getElementById('websiteInput');
+  const listType = document.getElementById('websiteListType').value;
+  const website = input.value.trim().toLowerCase();
+  
+  if (website) {
+    chrome.runtime.sendMessage({
+      action: 'addWebsite',
+      website: website,
+      listType: listType
+    });
+    input.value = '';
+    updateWebsiteLists();
+  }
+});
+
+// Allow Enter key to add website
+document.getElementById('websiteInput').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    document.getElementById('addWebsiteBtn').click();
+  }
 });
 
 // Update every second

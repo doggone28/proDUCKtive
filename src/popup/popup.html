@@ -16,11 +16,39 @@
         <span class="label">Inactive Time:</span>
         <span class="value" id="inactiveTime">0s</span>
       </div>
+      <div class="stat">
+        <span class="label">Current Site:</span>
+        <span class="value" id="currentSite">-</span>
+      </div>
     </div>
     
     <div class="controls">
       <button id="productiveBtn" class="btn productive">I'm Being Productive!</button>
       <button id="unproductiveBtn" class="btn unproductive">I'm Procrastinating</button>
+    </div>
+    
+    <div class="website-management">
+      <h3>Website Management</h3>
+      
+      <div class="add-website">
+        <input type="text" id="websiteInput" placeholder="Enter website (e.g., youtube.com)">
+        <select id="websiteListType">
+          <option value="productiveSites">Productive</option>
+          <option value="unproductiveSites">Unproductive</option>
+        </select>
+        <button id="addWebsiteBtn" class="btn small">Add</button>
+      </div>
+      
+      <div class="website-lists">
+        <div class="website-list">
+          <h4>Productive Sites</h4>
+          <ul id="productiveList" class="site-list"></ul>
+        </div>
+        <div class="website-list">
+          <h4>Unproductive Sites</h4>
+          <ul id="unproductiveList" class="site-list"></ul>
+        </div>
+      </div>
     </div>
     
     <div class="footer">

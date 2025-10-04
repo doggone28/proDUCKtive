@@ -32,15 +32,15 @@
   },
   
   "icons": {
-    "16": "public/icons/icon-16.png",
-    "48": "public/icons/icon-48.png",
-    "128": "public/icons/icon-128.png"
+    "16": "public/icons/icon16.svg",
+    "48": "public/icons/icon48.svg",
+    "128": "public/icons/icon128.svg"
   },
   
   "web_accessible_resources": [{
     "resources": [
-      "public/duck-static.png",
-      "public/duck-animated.gif", 
+      "public/duck.png",
+      "public/duck.gif", 
       "public/quack.mp3"
     ],
     "matches": ["<all_urls>"]

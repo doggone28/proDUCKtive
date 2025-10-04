@@ -54,11 +54,23 @@ function updateDuckAppearance() {
     duck.style.width = '80px';
     duck.style.height = '80px';
     
-    // Play quack sound when becoming unproductive
-    quackAudio.play().catch(() => {
-      // Auto-play might be blocked, that's okay
-    });
-  }
+    // Play quack sound repeatedly when unproductive
+    const playQuackLoop = () => {
+        quackAudio.play().catch(() => {
+            // Auto-play might be blocked, that's okay
+        });
+    };
+    
+    // Play immediately
+    playQuackLoop();
+    
+    // Set up repeating quack every 3 seconds
+    const quackInterval = setInterval(playQuackLoop, 20);
+    
+    // Store the interval ID so we can clear it later
+    duck.setAttribute('data-quack-interval', quackInterval);
+}
+
 }
 
 // Move duck around screen
