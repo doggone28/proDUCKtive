@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "proDUCKtive",
+  "version": "1.0",
+  "description": "Stay productive with a quacking duck reminder",
+  "permissions": ["activeTab", "storage", "tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ProDUCKtive Settings",
+    "default_icon": {
+      "16": "duck/icons/icon16.svg",
+      "48": "duck/icons/icon48.svg",
+      "128": "duck/icons/icon128.svg"
+    }
+  },
+  "icons": {
+    "16": "duck/icons/icon16.svg",
+    "48": "duck/icons/icon48.svg",
+    "128": "duck/icons/icon128.svg"
+  }
+}
