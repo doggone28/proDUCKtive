@@ -30,6 +30,7 @@ function updatePopup() {
   });
   
   updateWebsiteLists();
+  updateAISummary();
 }
 
 // Update website lists display
@@ -111,6 +112,32 @@ document.getElementById('websiteInput').addEventListener('keypress', (e) => {
   }
 });
 
-// Update every second
+
+// 🧠 --- AI SUMMARY SECTION --- 🧠
+
+// Load AI summary from storage
+async function updateAISummary() {
+  const summaryElement = document.getElementById('aiSummary');
+  if (!summaryElement) return;
+
+  const { aiSummary } = await chrome.storage.local.get('aiSummary');
+  summaryElement.textContent = aiSummary || "No summary yet 🦆";
+}
+
+// Force regenerate summary
+document.getElementById('refreshSummaryBtn')?.addEventListener('click', () => {
+  const summaryElement = document.getElementById('aiSummary');
+  summaryElement.textContent = "Generating summary...";
+  
+  chrome.runtime.sendMessage({ action: 'generateSummaryNow' }, (response) => {
+    if (response?.success) {
+      setTimeout(updateAISummary, 3000); // wait a few seconds for it to complete
+    } else {
+      summaryElement.textContent = "Error generating summary.";
+    }
+  });
+});
+
+// Auto-update every second
 updatePopup();
 setInterval(updatePopup, 1000);

@@ -8,7 +8,7 @@ body {
 
 .popup-container {
   padding: 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #121212 0%, #0e0e0d 100%);
   color: white;
 }
 
@@ -194,3 +194,26 @@ body {
 .footer p {
   margin: 0;
 }   
+
+.ai-summary {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.ai-summary h3 {
+  text-align: center;
+  margin-bottom: 8px;
+  font-size: 1.1em;
+}
+
+#aiSummary {
+  font-size: 0.85em;
+  line-height: 1.4em;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px;
+  border-radius: 8px;
+  white-space: pre-wrap;
+  margin-bottom: 8px;
+}
